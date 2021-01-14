@@ -16,113 +16,171 @@ KAFKA:
      TABLE: customer
      MAPPING:
 
-        - NAME: countryKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'countryKey'::varchar as countryKey
-        - NAME: changeCycleRequestDate
-          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestDate')::double precision/1000) as changeCycleRequestDate
-        - NAME: salesRating
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'salesRating'::varchar as salesRating
+        - NAME: originatingCountryKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'originatingCountryKey'::varchar as originatingCountryKey
+        - NAME: calledZone
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'calledZone'::varchar as calledZone
+        - NAME: billingArrangementKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingArrangementKey'::varchar as billingArrangementKey
         - NAME: customerKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerKey'::varchar as customerKey
-        - NAME: customerLegalName
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerLegalName'::varchar as customerLegalName
-        - NAME: fiscalYearEndDate
-          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'fiscalYearEndDate')::double precision/1000) as fiscalYearEndDate
-        - NAME: crmCustomerMainContactSourceId
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmCustomerMainContactSourceId'::varchar as crmCustomerMainContactSourceId
-        - NAME: lastActivityReasonKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'lastActivityReasonKey'::varchar as lastActivityReasonKey
-        - NAME: changeCycleRequestFlag
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestFlag'::varchar as changeCycleRequestFlag
-        - NAME: externalId
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'externalId'::varchar as externalId
-        - NAME: transactionTime
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'transactionTime'::varchar as transactionTime
-        - NAME: rootOrganizationKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'rootOrganizationKey'::varchar as rootOrganizationKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'customerKey'::varchar as customerKey
+        - NAME: chargingTypeInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargingTypeInd'::varchar as chargingTypeInd
         - NAME: billingCycleKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'billingCycleKey'::varchar as billingCycleKey
-        - NAME: operation
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'operation'::varchar as operation
-        - NAME: requestedBillCycleFrequencyInd
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'requestedBillCycleFrequencyInd'::varchar as requestedBillCycleFrequencyInd
-        - NAME: employeesNumber
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'employeesNumber'::varchar as employeesNumber
-        - NAME: requestedBillingCycleKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'requestedBillingCycleKey'::varchar as requestedBillingCycleKey
-        - NAME: defaultPrepaidPayChannelKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'defaultPrepaidPayChannelKey'::varchar as defaultPrepaidPayChannelKey
-        - NAME: rootOrganizationName
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'rootOrganizationName'::varchar as rootOrganizationName
-        - NAME: postalStreetName
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'postalStreetName'::varchar as postalStreetName
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingCycleKey'::varchar as billingCycleKey
+        - NAME: totalDataVolume
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'totalDataVolume'::varchar as totalDataVolume
+        - NAME: interfaceTypeInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'interfaceTypeInd'::varchar as interfaceTypeInd
+        - NAME: networkSourceId
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'networkSourceId'::varchar as networkSourceId
+        - NAME: billingCycleInstanceKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingCycleInstanceKey'::varchar as billingCycleInstanceKey
+        - NAME: eventDirectionInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventDirectionInd'::varchar as eventDirectionInd
+        - NAME: specialNumberKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'specialNumberKey'::varchar as specialNumberKey
+        - NAME: duration
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'duration'::varchar as duration
+        - NAME: allowanceTraversal
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'allowanceTraversal'::varchar as allowanceTraversal
+        - NAME: transactionTime
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'transactionTime'::varchar as transactionTime
+        - NAME: rerateTypeFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'rerateTypeFlag'::varchar as rerateTypeFlag
+        - NAME: equipmentCatalogKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'equipmentCatalogKey'::varchar as equipmentCatalogKey
+        - NAME: roamingFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'roamingFlag'::varchar as roamingFlag
+        - NAME: taxCodeKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'taxCodeKey'::varchar as taxCodeKey
+        - NAME: callForwardFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callForwardFlag'::varchar as callForwardFlag
+        - NAME: roundedUnit
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'roundedUnit'::varchar as roundedUnit
+        - NAME: monetaryTraversal
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'monetaryTraversal'::varchar as monetaryTraversal
+        - NAME: callSubTypeCode
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callSubTypeCode'::varchar as callSubTypeCode
+        - NAME: cellKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'cellKey'::varchar as cellKey
+        - NAME: assignedBillingOfferKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'assignedBillingOfferKey'::varchar as assignedBillingOfferKey
+        - NAME: eventId
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventId'::varchar as eventId
+        - NAME: financialAccountKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'financialAccountKey'::varchar as financialAccountKey
+        - NAME: freeAllowanceAmount
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'freeAllowanceAmount'::varchar as freeAllowanceAmount
+        - NAME: subscriberSalesChannelKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'subscriberSalesChannelKey'::varchar as subscriberSalesChannelKey
+        - NAME: accessPointGroupCode
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'accessPointGroupCode'::varchar as accessPointGroupCode
+        - NAME: actualDataVolume
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'actualDataVolume'::varchar as actualDataVolume
+        - NAME: billableDuration
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billableDuration'::varchar as billableDuration
+        - NAME: locationAreaCode
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'locationAreaCode'::varchar as locationAreaCode
         - NAME: queryTime
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'queryTime'::varchar as queryTime
-        - NAME: crmCustomerSourceId
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmCustomerSourceId'::varchar as crmCustomerSourceId
-        - NAME: salesChannelKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'salesChannelKey'::varchar as salesChannelKey
-        - NAME: streetAddress
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'streetAddress'::varchar as streetAddress
-        - NAME: phoneNumber
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'phoneNumber'::varchar as phoneNumber
-        - NAME: bssModificationDate
-          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'bssModificationDate')::double precision/1000) as bssModificationDate
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'queryTime'::varchar as queryTime
+        - NAME: periodInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'periodInd'::varchar as periodInd
+        - NAME: actualDuration
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'actualDuration'::varchar as actualDuration
+        - NAME: exchangeCode
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'exchangeCode'::varchar as exchangeCode
+        - NAME: unitOfMeasureInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'unitOfMeasureInd'::varchar as unitOfMeasureInd
         - NAME: bssCreationDate
-          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'bssCreationDate')::double precision/1000) as bssCreationDate
-        - NAME: creditClassKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'creditClassKey'::varchar as creditClassKey
-        - NAME: email
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'email'::varchar as email
-        - NAME: businessPurposeDesc
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'businessPurposeDesc'::varchar as businessPurposeDesc
-        - NAME: crmBusinessOrganizationSourceId
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmBusinessOrganizationSourceId'::varchar as crmBusinessOrganizationSourceId
-        - NAME: acquisitionDate
-          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'acquisitionDate')::double precision/1000) as acquisitionDate
-        - NAME: parentOrganizationKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'parentOrganizationKey'::varchar as parentOrganizationKey
-        - NAME: mainContactKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'mainContactKey'::varchar as mainContactKey
-        - NAME: zipCode
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'zipCode'::varchar as zipCode
-        - NAME: defaultPostpaidPayChannelKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'defaultPostpaidPayChannelKey'::varchar as defaultPostpaidPayChannelKey
-        - NAME: largeCustomerFlag
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'largeCustomerFlag'::varchar as largeCustomerFlag
-        - NAME: structureTypeInd
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'structureTypeInd'::varchar as structureTypeInd
-        - NAME: customerStatusKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerStatusKey'::varchar as customerStatusKey
-        - NAME: revenueRange
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'revenueRange'::varchar as revenueRange
-        - NAME: openDate
-          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'openDate')::double precision/1000) as openDate
-        - NAME: webSite
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'webSite'::varchar as webSite
-        - NAME: cityKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'cityKey'::varchar as cityKey
-        - NAME: dealerKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'dealerKey'::varchar as dealerKey
-        - NAME: customerSubTypeKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerSubTypeKey'::varchar as customerSubTypeKey
-        - NAME: customerTypeKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerTypeKey'::varchar as customerTypeKey
-        - NAME: billCycleFrequencyInd
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'billCycleFrequencyInd'::varchar as billCycleFrequencyInd
-        - NAME: mainAddressKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'mainAddressKey'::varchar as mainAddressKey
-        - NAME: cmCustomerSourceId
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'cmCustomerSourceId'::varchar as cmCustomerSourceId
-        - NAME: stockCode
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'stockCode'::varchar as stockCode
-        - NAME: changeCycleRequestStatusInd
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestStatusInd'::varchar as changeCycleRequestStatusInd
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'bssCreationDate')::double precision/1000) as bssCreationDate
+        - NAME: eventStartDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventStartDate')::double precision/1000) as eventStartDate
+        - NAME: bssModificationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'bssModificationDate')::double precision/1000) as bssModificationDate
+        - NAME: serviceProviderKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'serviceProviderKey'::varchar as serviceProviderKey
+        - NAME: eventTypeKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventTypeKey'::varchar as eventTypeKey
+        - NAME: accessPointName
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'accessPointName'::varchar as accessPointName
+        - NAME: freeOccurrence
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'freeOccurrence'::varchar as freeOccurrence
+        - NAME: imsi
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'imsi'::varchar as imsi
+        - NAME: callEndDatetime
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callEndDatetime')::double precision/1000) as callEndDatetime
+        - NAME: hourCode
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'hourCode'::varchar as hourCode
+        - NAME: operation
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'operation'::varchar as operation
+        - NAME: upstreamDataVolume
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'upstreamDataVolume'::varchar as upstreamDataVolume
+        - NAME: callTypeKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callTypeKey'::varchar as callTypeKey
+        - NAME: discountNetAmount
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'discountNetAmount'::varchar as discountNetAmount
+        - NAME: calledNumber
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'calledNumber'::varchar as calledNumber
+        - NAME: eventStartTime
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventStartTime'::varchar as eventStartTime
+        - NAME: networkStartTime
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'networkStartTime'::varchar as networkStartTime
+        - NAME: onNetFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'onNetFlag'::varchar as onNetFlag
+        - NAME: chargeCodeKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargeCodeKey'::varchar as chargeCodeKey
+        - NAME: serviceFilter
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'serviceFilter'::varchar as serviceFilter
+        - NAME: subscriberMainOfferKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'subscriberMainOfferKey'::varchar as subscriberMainOfferKey
+        - NAME: customerMvnoFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'customerMvnoFlag'::varchar as customerMvnoFlag
+        - NAME: billableUnit
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billableUnit'::varchar as billableUnit
+        - NAME: imei
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'imei'::varchar as imei
+        - NAME: chargeAmount
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargeAmount'::varchar as chargeAmount
+        - NAME: ratedNetAmount
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'ratedNetAmount'::varchar as ratedNetAmount
+        - NAME: downstreamDataVolume
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'downstreamDataVolume'::varchar as downstreamDataVolume
+        - NAME: billingOfferKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingOfferKey'::varchar as billingOfferKey
+        - NAME: paymentCategoryKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'paymentCategoryKey'::varchar as paymentCategoryKey
+        - NAME: serviceTypeKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'serviceTypeKey'::varchar as serviceTypeKey
         - NAME: targetUpdateTime
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'targetUpdateTime'::varchar as targetUpdateTime
-        - NAME: stateKey
-          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Customer')->>'stateKey'::varchar as stateKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'targetUpdateTime'::varchar as targetUpdateTime
+        - NAME: cityKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'cityKey'::varchar as cityKey
+        - NAME: terminatingCountryKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'terminatingCountryKey'::varchar as terminatingCountryKey
+        - NAME: currencyKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'currencyKey'::varchar as currencyKey
+        - NAME: subscriberKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'subscriberKey'::varchar as subscriberKey
+        - NAME: chargeNetAmount
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargeNetAmount'::varchar as chargeNetAmount
+        - NAME: ratedAmount
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'ratedAmount'::varchar as ratedAmount
+        - NAME: callingZone
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callingZone'::varchar as callingZone
+        - NAME: reratedFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'reratedFlag'::varchar as reratedFlag
+        - NAME: tacNumber
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'tacNumber'::varchar as tacNumber
+        - NAME: notChargedServiceProviderKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'notChargedServiceProviderKey'::varchar as notChargedServiceProviderKey
+        - NAME: discountAmount
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'discountAmount'::varchar as discountAmount
+        - NAME: payChannelKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'payChannelKey'::varchar as payChannelKey
+        - NAME: callingNumber
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callingNumber'::varchar as callingNumber
 
-  COMMIT:
-    MAX_ROW:1
-    MINIMAL_INTERVAL:1000
+   COMMIT:
+     MAX_ROW: 1
+     MINIMAL_INTERVAL: 1000

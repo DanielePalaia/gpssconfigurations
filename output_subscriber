@@ -1,0 +1,128 @@
+DATABASE: aia_datastore
+USER: gpadmin
+HOST: 172.21.0.5
+PORT: 6432
+KAFKA:
+   INPUT:
+     SOURCE:
+        BROKERS: localhost:9092
+        TOPIC: test_aLDMCustomer
+     COLUMNS:
+        - NAME: jdata
+          TYPE: json
+     FORMAT: json
+     ERROR_LIMIT: 10
+   OUTPUT:
+     TABLE: customer
+     MAPPING:
+
+        - NAME: countryKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'countryKey'::varchar as countryKey
+        - NAME: changeCycleRequestDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'changeCycleRequestDate')::double precision/1000) as changeCycleRequestDate
+        - NAME: salesRating
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'salesRating'::varchar as salesRating
+        - NAME: customerKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'customerKey'::varchar as customerKey
+        - NAME: customerLegalName
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'customerLegalName'::varchar as customerLegalName
+        - NAME: fiscalYearEndDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'fiscalYearEndDate')::double precision/1000) as fiscalYearEndDate
+        - NAME: crmCustomerMainContactSourceId
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'crmCustomerMainContactSourceId'::varchar as crmCustomerMainContactSourceId
+        - NAME: lastActivityReasonKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'lastActivityReasonKey'::varchar as lastActivityReasonKey
+        - NAME: changeCycleRequestFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'changeCycleRequestFlag'::varchar as changeCycleRequestFlag
+        - NAME: externalId
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'externalId'::varchar as externalId
+        - NAME: transactionTime
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'transactionTime'::varchar as transactionTime
+        - NAME: rootOrganizationKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'rootOrganizationKey'::varchar as rootOrganizationKey
+        - NAME: billingCycleKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'billingCycleKey'::varchar as billingCycleKey
+        - NAME: operation
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'operation'::varchar as operation
+        - NAME: requestedBillCycleFrequencyInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'requestedBillCycleFrequencyInd'::varchar as requestedBillCycleFrequencyInd
+        - NAME: employeesNumber
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'employeesNumber'::varchar as employeesNumber
+        - NAME: requestedBillingCycleKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'requestedBillingCycleKey'::varchar as requestedBillingCycleKey
+        - NAME: defaultPrepaidPayChannelKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'defaultPrepaidPayChannelKey'::varchar as defaultPrepaidPayChannelKey
+        - NAME: rootOrganizationName
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'rootOrganizationName'::varchar as rootOrganizationName
+        - NAME: postalStreetName
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'postalStreetName'::varchar as postalStreetName
+        - NAME: queryTime
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'queryTime'::varchar as queryTime
+        - NAME: crmCustomerSourceId
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'crmCustomerSourceId'::varchar as crmCustomerSourceId
+        - NAME: salesChannelKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'salesChannelKey'::varchar as salesChannelKey
+        - NAME: streetAddress
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'streetAddress'::varchar as streetAddress
+        - NAME: phoneNumber
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'phoneNumber'::varchar as phoneNumber
+        - NAME: bssModificationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'bssModificationDate')::double precision/1000) as bssModificationDate
+        - NAME: bssCreationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'bssCreationDate')::double precision/1000) as bssCreationDate
+        - NAME: creditClassKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'creditClassKey'::varchar as creditClassKey
+        - NAME: email
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'email'::varchar as email
+        - NAME: businessPurposeDesc
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'businessPurposeDesc'::varchar as businessPurposeDesc
+        - NAME: crmBusinessOrganizationSourceId
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'crmBusinessOrganizationSourceId'::varchar as crmBusinessOrganizationSourceId
+        - NAME: acquisitionDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'acquisitionDate')::double precision/1000) as acquisitionDate
+        - NAME: parentOrganizationKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'parentOrganizationKey'::varchar as parentOrganizationKey
+        - NAME: mainContactKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'mainContactKey'::varchar as mainContactKey
+        - NAME: zipCode
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'zipCode'::varchar as zipCode
+        - NAME: defaultPostpaidPayChannelKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'defaultPostpaidPayChannelKey'::varchar as defaultPostpaidPayChannelKey
+        - NAME: largeCustomerFlag
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'largeCustomerFlag'::varchar as largeCustomerFlag
+        - NAME: structureTypeInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'structureTypeInd'::varchar as structureTypeInd
+        - NAME: customerStatusKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'customerStatusKey'::varchar as customerStatusKey
+        - NAME: revenueRange
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'revenueRange'::varchar as revenueRange
+        - NAME: openDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'openDate')::double precision/1000) as openDate
+        - NAME: webSite
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'webSite'::varchar as webSite
+        - NAME: cityKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'cityKey'::varchar as cityKey
+        - NAME: dealerKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'dealerKey'::varchar as dealerKey
+        - NAME: customerSubTypeKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'customerSubTypeKey'::varchar as customerSubTypeKey
+        - NAME: customerTypeKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'customerTypeKey'::varchar as customerTypeKey
+        - NAME: billCycleFrequencyInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'billCycleFrequencyInd'::varchar as billCycleFrequencyInd
+        - NAME: mainAddressKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'mainAddressKey'::varchar as mainAddressKey
+        - NAME: cmCustomerSourceId
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'cmCustomerSourceId'::varchar as cmCustomerSourceId
+        - NAME: stockCode
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'stockCode'::varchar as stockCode
+        - NAME: changeCycleRequestStatusInd
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'changeCycleRequestStatusInd'::varchar as changeCycleRequestStatusInd
+        - NAME: targetUpdateTime
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'targetUpdateTime'::varchar as targetUpdateTime
+        - NAME: stateKey
+          EXPRESSION: json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'stateKey'::varchar as stateKey
+
+   COMMIT:
+     MAX_ROW:1
+     MINIMAL_INTERVAL:1000
