@@ -1,4 +1,4 @@
-# GPSS configuration istruction
+# GPSS configuration instructions
 
 The following repository contains two folders: gpssfiles and pythonparser </br>
 The first one contains the configuration files to start gpss server and gpsscli clients </br>
