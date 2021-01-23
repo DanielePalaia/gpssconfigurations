@@ -63,11 +63,84 @@ You can use as an example the standard kafka-console producer to ingest the data
 
 You shoud see then the greenplum table populated
 
-## Ingesting data on kafka
+## stop the task
+
+you may want to stop the task with the equivalent 
+
+```
+gpsscli stop task-customer --gpss-port 50009 --gpss-host 172.21.0.5
+
+```
+
+## python script
+
+A skeleton of a python script has been implemented in order to generate the mapping starting from a .json file
+
+the script takes in input the first part of a gpsscli configuration file:
+
+```
+DATABASE: aia_datastore
+USER: gpadmin
+HOST: 172.21.0.5
+PORT: 6432
+KAFKA:
+   INPUT:
+     SOURCE:
+        BROKERS: localhost:9092
+        TOPIC: test_aLDMCustomer
+     COLUMNS:
+        - NAME: jdata
+          TYPE: json
+     FORMAT: json
+     ERROR_LIMIT: 10
+   OUTPUT:
+     TABLE: customer
+     MAPPING:
+```
+
+and it will append the mapping to it.
+
+in Order to do this we need to specify the following parameters:
+
+```
+# input files
+gpsscli_configuration_file = "./gpsscli_file.yaml"
+json_file = "./customer.json"
 
 
+# json keys to search
+superkey = "repeatedMessages"
+entry = "Customer"
+```
+
+the first one is the gpsscli configuration file described above and the other one is the .json to parse.
 
 
+The script will print at screen the all final configuration which you can redirect > to an output file for instance
 
+```
+dpalaia-a01:pythonparser dpalaia$ python jsonparser.py 
+DATABASE: aia_datastore
+USER: gpadmin
+HOST: 172.21.0.5
+PORT: 6432
+KAFKA:
+   INPUT:
+     SOURCE:
+        BROKERS: localhost:9092
+        TOPIC: test_aLDMCustomer
+     COLUMNS:
+        - NAME: jdata
+          TYPE: json
+     FORMAT: json
+     ERROR_LIMIT: 10
+   OUTPUT:
+     TABLE: customer
+     MAPPING:
 
+        - NAME: countryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'countryKey')::text as countryKey
+        - NAME: changeCycleRequestDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestDate')::double precision/1000) as changeCycleRequestDate
+```
 
