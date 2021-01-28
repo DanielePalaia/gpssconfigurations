@@ -1,0 +1,179 @@
+DATABASE: aia_datastore
+USER: gpadmin
+HOST: 172.21.0.5
+PORT: 6432
+KAFKA:
+   INPUT:
+     SOURCE:
+        BROKERS: localhost:9092
+        TOPIC: usagetopicnew4
+     COLUMNS:
+        - NAME: jdata
+          TYPE: json
+     FORMAT: json
+     ERROR_LIMIT: 1000
+   OUTPUT:
+     TABLE: usage
+     MAPPING:
+
+        - NAME: originatingCountryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'originatingCountryKey')::text as originatingCountryKey
+        - NAME: calledZone
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'calledZone')::text as calledZone
+        - NAME: billingArrangementKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingArrangementKey')::text as billingArrangementKey
+        - NAME: customerKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'customerKey')::text as customerKey
+        - NAME: chargingTypeInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargingTypeInd')::text as chargingTypeInd
+        - NAME: billingCycleKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingCycleKey')::text as billingCycleKey
+        - NAME: totalDataVolume
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'totalDataVolume')::numeric as totalDataVolume
+        - NAME: interfaceTypeInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'interfaceTypeInd')::text as interfaceTypeInd
+        - NAME: networkSourceId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'networkSourceId')::text as networkSourceId
+        - NAME: billingCycleInstanceKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingCycleInstanceKey')::text as billingCycleInstanceKey
+        - NAME: eventDirectionInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventDirectionInd')::text as eventDirectionInd
+        - NAME: specialNumberKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'specialNumberKey')::text as specialNumberKey
+        - NAME: duration
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'duration')::numeric as duration
+        - NAME: allowanceTraversal
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'allowanceTraversal')::text as allowanceTraversal
+        - NAME: rerateTypeFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'rerateTypeFlag')::text as rerateTypeFlag
+        - NAME: equipmentCatalogKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'equipmentCatalogKey')::text as equipmentCatalogKey
+        - NAME: roamingFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'roamingFlag')::text as roamingFlag
+        - NAME: taxCodeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'taxCodeKey')::text as taxCodeKey
+        - NAME: callForwardFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callForwardFlag')::text as callForwardFlag
+        - NAME: roundedUnit
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'roundedUnit')::bigint as roundedUnit
+        - NAME: monetaryTraversal
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'monetaryTraversal')::text as monetaryTraversal
+        - NAME: callSubTypeCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callSubTypeCode')::text as callSubTypeCode
+        - NAME: cellKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'cellKey')::text as cellKey
+        - NAME: assignedBillingOfferKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'assignedBillingOfferKey')::text as assignedBillingOfferKey
+        - NAME: eventId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventId')::text as eventId
+        - NAME: financialAccountKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'financialAccountKey')::text as financialAccountKey
+        - NAME: freeAllowanceAmount
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'freeAllowanceAmount')::numeric as freeAllowanceAmount
+        - NAME: subscriberSalesChannelKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'subscriberSalesChannelKey')::text as subscriberSalesChannelKey
+        - NAME: accessPointGroupCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'accessPointGroupCode')::text as accessPointGroupCode
+        - NAME: actualDataVolume
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'actualDataVolume')::numeric as actualDataVolume
+        - NAME: billableDuration
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billableDuration')::numeric as billableDuration
+        - NAME: locationAreaCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'locationAreaCode')::text as locationAreaCode
+        - NAME: periodInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'periodInd')::text as periodInd
+        - NAME: actualDuration
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'actualDuration')::numeric as actualDuration
+        - NAME: exchangeCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'exchangeCode')::text as exchangeCode
+        - NAME: unitOfMeasureInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'unitOfMeasureInd')::text as unitOfMeasureInd
+        - NAME: bssCreationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'bssCreationDate')::double precision/1000) as bssCreationDate
+        - NAME: eventStartDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventStartDate')::double precision/1000) as eventStartDate
+        - NAME: bssModificationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'bssModificationDate')::double precision/1000) as bssModificationDate
+        - NAME: serviceProviderKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'serviceProviderKey')::text as serviceProviderKey
+        - NAME: eventTypeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventTypeKey')::text as eventTypeKey
+        - NAME: accessPointName
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'accessPointName')::text as accessPointName
+        - NAME: freeOccurrence
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'freeOccurrence')::bigint as freeOccurrence
+        - NAME: imsi
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'imsi')::text as imsi
+        - NAME: callEndDatetime
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callEndDatetime')::double precision/1000) as callEndDatetime
+        - NAME: hourCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'hourCode')::text as hourCode
+        - NAME: upstreamDataVolume
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'upstreamDataVolume')::numeric as upstreamDataVolume
+        - NAME: callTypeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callTypeKey')::text as callTypeKey
+        - NAME: discountNetAmount
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'discountNetAmount')::numeric as discountNetAmount
+        - NAME: calledNumber
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'calledNumber')::text as calledNumber
+        - NAME: eventStartTime
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'eventStartTime')::double precision/1000) as eventStartTime
+        - NAME: networkStartTime
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Usage')->>'networkStartTime')::double precision/1000) as networkStartTime
+        - NAME: onNetFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'onNetFlag')::text as onNetFlag
+        - NAME: chargeCodeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargeCodeKey')::text as chargeCodeKey
+        - NAME: serviceFilter
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'serviceFilter')::text as serviceFilter
+        - NAME: subscriberMainOfferKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'subscriberMainOfferKey')::text as subscriberMainOfferKey
+        - NAME: customerMvnoFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'customerMvnoFlag')::text as customerMvnoFlag
+        - NAME: billableUnit
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billableUnit')::bigint as billableUnit
+        - NAME: imei
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'imei')::text as imei
+        - NAME: chargeAmount
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargeAmount')::numeric as chargeAmount
+        - NAME: ratedNetAmount
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'ratedNetAmount')::numeric as ratedNetAmount
+        - NAME: downstreamDataVolume
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'downstreamDataVolume')::numeric as downstreamDataVolume
+        - NAME: billingOfferKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'billingOfferKey')::text as billingOfferKey
+        - NAME: paymentCategoryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'paymentCategoryKey')::text as paymentCategoryKey
+        - NAME: serviceTypeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'serviceTypeKey')::text as serviceTypeKey
+        - NAME: cityKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'cityKey')::text as cityKey
+        - NAME: terminatingCountryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'terminatingCountryKey')::text as terminatingCountryKey
+        - NAME: currencyKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'currencyKey')::text as currencyKey
+        - NAME: subscriberKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'subscriberKey')::text as subscriberKey
+        - NAME: chargeNetAmount
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'chargeNetAmount')::numeric as chargeNetAmount
+        - NAME: ratedAmount
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'ratedAmount')::numeric as ratedAmount
+        - NAME: callingZone
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callingZone')::text as callingZone
+        - NAME: reratedFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'reratedFlag')::text as reratedFlag
+        - NAME: tacNumber
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'tacNumber')::text as tacNumber
+        - NAME: notChargedServiceProviderKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'notChargedServiceProviderKey')::text as notChargedServiceProviderKey
+        - NAME: discountAmount
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'discountAmount')::numeric as discountAmount
+        - NAME: payChannelKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'payChannelKey')::text as payChannelKey
+        - NAME: callingNumber
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Usage')->>'callingNumber')::text as callingNumber
+
+   COMMIT:
+     MAX_ROW: 10000
+     MINIMAL_INTERVAL: 5000
+

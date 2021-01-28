@@ -1,0 +1,119 @@
+DATABASE: aia_datastore
+USER: gpadmin
+HOST: 172.21.0.5
+PORT: 6432
+KAFKA:
+   INPUT:
+     SOURCE:
+        BROKERS: localhost:9092
+        TOPIC: customertopicnew2
+     COLUMNS:
+        - NAME: jdata
+          TYPE: json
+     FORMAT: json
+     ERROR_LIMIT: 1000
+   OUTPUT:
+     TABLE: subscriber_test
+     MAPPING:
+
+        - NAME: languageKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'languageKey')::text as languageKey
+        - NAME: subscriberStatusReasonKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberStatusReasonKey')::text as subscriberStatusReasonKey
+        - NAME: subscriberBirthDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberBirthDate')::double precision/1000) as subscriberBirthDate
+        - NAME: customerKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'customerKey')::text as customerKey
+        - NAME: portationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'portationDate')::double precision/1000) as portationDate
+        - NAME: subscriberSequenceNumber
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberSequenceNumber')::bigint as subscriberSequenceNumber
+        - NAME: cmSubscriberId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'cmSubscriberId')::text as cmSubscriberId
+        - NAME: userGroupKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'userGroupKey')::text as userGroupKey
+        - NAME: businessGroupKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'businessGroupKey')::text as businessGroupKey
+        - NAME: effectiveDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'effectiveDate')::double precision/1000) as effectiveDate
+        - NAME: calculatedPaymentCategoryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'calculatedPaymentCategoryKey')::text as calculatedPaymentCategoryKey
+        - NAME: subscriberStatusKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberStatusKey')::text as subscriberStatusKey
+        - NAME: dealerKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'dealerKey')::text as dealerKey
+        - NAME: mainAddressKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'mainAddressKey')::text as mainAddressKey
+        - NAME: subscriberStatusReasonCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberStatusReasonCode')::text as subscriberStatusReasonCode
+        - NAME: countryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'countryKey')::text as countryKey
+        - NAME: salesChannelKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'salesChannelKey')::text as salesChannelKey
+        - NAME: bssCreationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'bssCreationDate')::double precision/1000) as bssCreationDate
+        - NAME: subscriberTypeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberTypeKey')::text as subscriberTypeKey
+        - NAME: bssModificationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'bssModificationDate')::double precision/1000) as bssModificationDate
+        - NAME: primaryResourceValue
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'primaryResourceValue')::text as primaryResourceValue
+        - NAME: crmSubscriberId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'crmSubscriberId')::text as crmSubscriberId
+        - NAME: organizationUnitKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'organizationUnitKey')::text as organizationUnitKey
+        - NAME: portationOperatorKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'portationOperatorKey')::text as portationOperatorKey
+        - NAME: mainContactKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'mainContactKey')::text as mainContactKey
+        - NAME: subscriberStatusIssueDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberStatusIssueDate')::double precision/1000) as subscriberStatusIssueDate
+        - NAME: originalActivationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'originalActivationDate')::double precision/1000) as originalActivationDate
+        - NAME: recordExpirationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'recordExpirationDate')::double precision/1000) as recordExpirationDate
+        - NAME: productLineOfBusinessKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'productLineOfBusinessKey')::text as productLineOfBusinessKey
+        - NAME: previousPaymentCategoryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'previousPaymentCategoryKey')::text as previousPaymentCategoryKey
+        - NAME: migrationType
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'migrationType')::text as migrationType
+        - NAME: lastActivityCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'lastActivityCode')::text as lastActivityCode
+        - NAME: subscriberFirstName
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberFirstName')::text as subscriberFirstName
+        - NAME: cityKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'cityKey')::text as cityKey
+        - NAME: subscriberLastName
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberLastName')::text as subscriberLastName
+        - NAME: subscriberMiddleName
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberMiddleName')::text as subscriberMiddleName
+        - NAME: portationType
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'portationType')::text as portationType
+        - NAME: primaryResourceTypeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'primaryResourceTypeKey')::text as primaryResourceTypeKey
+        - NAME: subscriberKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberKey')::text as subscriberKey
+        - NAME: externalId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'externalId')::text as externalId
+        - NAME: customerSiteKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'customerSiteKey')::text as customerSiteKey
+        - NAME: employeeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'employeeKey')::text as employeeKey
+        - NAME: subscriberStatusDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'subscriberStatusDate')::double precision/1000) as subscriberStatusDate
+        - NAME: activationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'activationDate')::double precision/1000) as activationDate
+        - NAME: nextSubscriberKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'nextSubscriberKey')::text as nextSubscriberKey
+        - NAME: frameworkAgreementKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'frameworkAgreementKey')::text as frameworkAgreementKey
+        - NAME: previousSubscriberKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'previousSubscriberKey')::text as previousSubscriberKey
+        - NAME: stateKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Subscriber')->>'stateKey')::text as stateKey
+
+   COMMIT:
+     MAX_ROW: 10000
+     MINIMAL_INTERVAL: 5000
+

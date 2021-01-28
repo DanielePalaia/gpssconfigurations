@@ -1,0 +1,121 @@
+DATABASE: aia_datastore
+USER: gpadmin
+HOST: 172.21.0.5
+PORT: 6432
+KAFKA:
+   INPUT:
+     SOURCE:
+        BROKERS: localhost:9092
+        TOPIC: customertopicnew2
+     COLUMNS:
+        - NAME: jdata
+          TYPE: json
+     FORMAT: json
+     ERROR_LIMIT: 1000
+   OUTPUT:
+     TABLE: customer_test
+     MAPPING:
+
+        - NAME: countryKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'countryKey')::text as countryKey
+        - NAME: changeCycleRequestDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestDate')::double precision/1000) as changeCycleRequestDate
+        - NAME: salesRating
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'salesRating')::text as salesRating
+        - NAME: customerKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerKey')::text as customerKey
+        - NAME: customerLegalName
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerLegalName')::text as customerLegalName
+        - NAME: fiscalYearEndDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'fiscalYearEndDate')::double precision/1000) as fiscalYearEndDate
+        - NAME: crmCustomerMainContactSourceId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmCustomerMainContactSourceId')::text as crmCustomerMainContactSourceId
+        - NAME: lastActivityReasonKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'lastActivityReasonKey')::text as lastActivityReasonKey
+        - NAME: changeCycleRequestFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestFlag')::text as changeCycleRequestFlag
+        - NAME: externalId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'externalId')::text as externalId
+        - NAME: rootOrganizationKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'rootOrganizationKey')::text as rootOrganizationKey
+        - NAME: billingCycleKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'billingCycleKey')::text as billingCycleKey
+        - NAME: requestedBillCycleFrequencyInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'requestedBillCycleFrequencyInd')::text as requestedBillCycleFrequencyInd
+        - NAME: employeesNumber
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'employeesNumber')::text as employeesNumber
+        - NAME: requestedBillingCycleKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'requestedBillingCycleKey')::text as requestedBillingCycleKey
+        - NAME: defaultPrepaidPayChannelKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'defaultPrepaidPayChannelKey')::text as defaultPrepaidPayChannelKey
+        - NAME: rootOrganizationName
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'rootOrganizationName')::text as rootOrganizationName
+        - NAME: postalStreetName
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'postalStreetName')::text as postalStreetName
+        - NAME: crmCustomerSourceId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmCustomerSourceId')::text as crmCustomerSourceId
+        - NAME: salesChannelKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'salesChannelKey')::text as salesChannelKey
+        - NAME: streetAddress
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'streetAddress')::text as streetAddress
+        - NAME: phoneNumber
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'phoneNumber')::text as phoneNumber
+        - NAME: bssModificationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'bssModificationDate')::double precision/1000) as bssModificationDate
+        - NAME: bssCreationDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'bssCreationDate')::double precision/1000) as bssCreationDate
+        - NAME: creditClassKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'creditClassKey')::text as creditClassKey
+        - NAME: email
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'email')::text as email
+        - NAME: businessPurposeDesc
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'businessPurposeDesc')::text as businessPurposeDesc
+        - NAME: crmBusinessOrganizationSourceId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmBusinessOrganizationSourceId')::text as crmBusinessOrganizationSourceId
+        - NAME: acquisitionDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'acquisitionDate')::double precision/1000) as acquisitionDate
+        - NAME: parentOrganizationKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'parentOrganizationKey')::text as parentOrganizationKey
+        - NAME: mainContactKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'mainContactKey')::text as mainContactKey
+        - NAME: zipCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'zipCode')::text as zipCode
+        - NAME: defaultPostpaidPayChannelKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'defaultPostpaidPayChannelKey')::text as defaultPostpaidPayChannelKey
+        - NAME: largeCustomerFlag
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'largeCustomerFlag')::text as largeCustomerFlag
+        - NAME: structureTypeInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'structureTypeInd')::text as structureTypeInd
+        - NAME: customerStatusKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerStatusKey')::text as customerStatusKey
+        - NAME: revenueRange
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'revenueRange')::text as revenueRange
+        - NAME: openDate
+          EXPRESSION: to_timestamp((json_array_elements(jdata->'repeatedMessages'->'Customer')->>'openDate')::double precision/1000) as openDate
+        - NAME: webSite
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'webSite')::text as webSite
+        - NAME: cityKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'cityKey')::text as cityKey
+        - NAME: dealerKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'dealerKey')::text as dealerKey
+        - NAME: customerSubTypeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerSubTypeKey')::text as customerSubTypeKey
+        - NAME: customerTypeKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerTypeKey')::text as customerTypeKey
+        - NAME: billCycleFrequencyInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'billCycleFrequencyInd')::text as billCycleFrequencyInd
+        - NAME: mainAddressKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'mainAddressKey')::text as mainAddressKey
+        - NAME: cmCustomerSourceId
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'cmCustomerSourceId')::text as cmCustomerSourceId
+        - NAME: stockCode
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'stockCode')::text as stockCode
+        - NAME: changeCycleRequestStatusInd
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestStatusInd')::text as changeCycleRequestStatusInd
+        - NAME: stateKey
+          EXPRESSION: (json_array_elements(jdata->'repeatedMessages'->'Customer')->>'stateKey')::text as stateKey
+
+   COMMIT:
+     MAX_ROW: 10000
+     MINIMAL_INTERVAL: 5000
+
