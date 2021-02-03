@@ -8,7 +8,7 @@ json_file = "./customer.json"
 
 # json keys to search
 superkey = "repeatedMessages"
-entry = "Customer"
+entry = "Subscriber"
 
 
 def main():
