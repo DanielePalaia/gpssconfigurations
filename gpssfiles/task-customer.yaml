@@ -1,0 +1,175 @@
+DATABASE: aia_datastore
+USER: gpadmin
+HOST: 172.21.0.5
+PORT: 6432
+KAFKA:
+   INPUT:
+     SOURCE:
+        BROKERS: localhost:9092
+        TOPIC: customertoday
+     COLUMNS:
+        - NAME: jdata
+          TYPE: jsonb
+     FORMAT: json
+     ERROR_LIMIT: 10
+   OUTPUT:
+     TABLE: customer
+     MODE: MERGE
+     MATCH_COLUMNS:
+        - customerkey
+
+     UPDATE_COLUMNS:
+        - countrykey
+        - changecyclerequestdate
+        - salesrating
+        - customerkey
+        - customerlegalname
+        - fiscalyearenddate
+        - crmcustomermaincontactsourceid
+        - lastactivityreasonkey
+        - changecyclerequestflag
+        - externalid
+        - rootorganizationkey
+        - billingcyclekey
+        - requestedbillcyclefrequencyind
+        - employeesnumber
+        - requestedbillingcyclekey
+        - defaultprepaidpaychannelkey
+        - rootorganizationname
+        - postalstreetname
+        - crmcustomersourceid
+        - saleschannelkey
+        - streetaddress
+        - phonenumber
+        - bssmodificationdate
+        - bsscreationdate
+        - creditclasskey
+        - email
+        - businesspurposedesc
+        - crmbusinessorganizationsourceid
+        - acquisitiondate
+        - parentorganizationkey
+        - maincontactkey
+        - zipcode
+        - defaultpostpaidpaychannelkey
+        - largecustomerflag
+        - structuretypeind
+        - customerstatuskey
+        - revenuerange
+        - opendate
+        - website
+        - citykey
+        - dealerkey
+        - customersubtypekey
+        - customertypekey
+        - billcyclefrequencyind
+        - mainaddresskey
+        - cmcustomersourceid
+        - stockcode
+        - changecyclerequeststatusind
+        - statekey
+     MAPPING:
+        - NAME: countrykey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'countryKey')::text
+        - NAME: changecyclerequestdate
+          EXPRESSION: to_timestamp((jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestDate')::double precision/1000)
+        - NAME: salesrating
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'salesRating')::text
+        - NAME: customerkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerKey')::text
+        - NAME: customerlegalname
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerLegalName')::text
+        - NAME: fiscalyearenddate
+          EXPRESSION: to_timestamp((jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'fiscalYearEndDate')::double precision/1000)
+        - NAME: crmcustomermaincontactsourceid
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmCustomerMainContactSourceId')::text
+        - NAME: lastactivityreasonkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'lastActivityReasonKey')::text
+        - NAME: changecyclerequestflag
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestFlag')::text
+        - NAME: externalid
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'externalId')::text
+        - NAME: rootorganizationkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'rootOrganizationKey')::text
+        - NAME: billingcyclekey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'billingCycleKey')::text
+        - NAME: requestedbillcyclefrequencyind
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'requestedBillCycleFrequencyInd')::text
+        - NAME: employeesnumber
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'employeesNumber')::text
+        - NAME: requestedbillingcyclekey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'requestedBillingCycleKey')::text
+        - NAME: defaultprepaidpaychannelkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'defaultPrepaidPayChannelKey')::text
+        - NAME: rootorganizationname
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'rootOrganizationName')::text
+        - NAME: postalstreetname
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'postalStreetName')::text
+        - NAME: crmcustomersourceid
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmCustomerSourceId')::text
+        - NAME: saleschannelkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'salesChannelKey')::text
+        - NAME: streetaddress
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'streetAddress')::text
+        - NAME: phonenumber
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'phoneNumber')::text
+        - NAME: bssmodificationdate
+          EXPRESSION: to_timestamp((jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'bssModificationDate')::double precision/1000)
+        - NAME: bsscreationdate
+          EXPRESSION: to_timestamp((jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'bssCreationDate')::double precision/1000)
+        - NAME: creditclasskey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'creditClassKey')::text
+        - NAME: email
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'email')::text
+        - NAME: businesspurposedesc
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'businessPurposeDesc')::text
+        - NAME: crmbusinessorganizationsourceid
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'crmBusinessOrganizationSourceId')::text
+        - NAME: acquisitiondate
+          EXPRESSION: to_timestamp((jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'acquisitionDate')::double precision/1000)
+        - NAME: parentorganizationkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'parentOrganizationKey')::text
+        - NAME: maincontactkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'mainContactKey')::text
+        - NAME: zipcode
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'zipCode')::text
+        - NAME: defaultpostpaidpaychannelkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'defaultPostpaidPayChannelKey')::text
+        - NAME: largecustomerflag
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'largeCustomerFlag')::text
+        - NAME: structuretypeind
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'structureTypeInd')::text
+        - NAME: customerstatuskey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerStatusKey')::text
+        - NAME: revenuerange
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'revenueRange')::text
+        - NAME: opendate
+          EXPRESSION: to_timestamp((jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'openDate')::double precision/1000)
+        - NAME: website
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'webSite')::text
+        - NAME: citykey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'cityKey')::text
+        - NAME: dealerkey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'dealerKey')::text
+        - NAME: customersubtypekey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerSubTypeKey')::text
+        - NAME: customertypekey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'customerTypeKey')::text
+        - NAME: billcyclefrequencyind
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'billCycleFrequencyInd')::text
+        - NAME: mainaddresskey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'mainAddressKey')::text
+        - NAME: cmcustomersourceid
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'cmCustomerSourceId')::text
+        - NAME: stockcode
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'stockCode')::text
+        - NAME: changecyclerequeststatusind
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'changeCycleRequestStatusInd')::text
+        - NAME: statekey
+          EXPRESSION: (jsonb_array_elements(jdata->'repeatedMessages'->'Customer')->>'stateKey')::text
+        - NAME: row_update_time__
+          EXPRESSION: "NOW()"
+   COMMIT:
+     MAX_ROW: 1000
+     MINIMAL_INTERVAL: 1000
+

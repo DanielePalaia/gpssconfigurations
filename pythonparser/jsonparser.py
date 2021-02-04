@@ -3,12 +3,12 @@ import string
 
 # input files
 gpsscli_configuration_file = "./gpsscli_file.yaml"
-json_file = "./customer.json"
+json_file = "./usage.json"
 
 
 # json keys to search
 superkey = "repeatedMessages"
-entry = "Subscriber"
+entry = "Usage"
 
 
 def main():
